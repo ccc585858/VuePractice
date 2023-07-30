@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+    <style>
+      .btn_counter {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="MyApp">
+      <simple-counter text="計數器"></simple-counter>
+      <simple-counter text="Counter"></simple-counter>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <script type="module">
+      import SimpleCounter from "./components/SimpleCounter.js";
+      let app = Vue.createApp({});
+
+      app.component("SimpleCounter", SimpleCounter);
+      // 第一個參數是元件名稱可以自訂，第二個參數是引入的模組名稱
+
+      app.mount("#MyApp");
+    </script>
+  </body>
+</html>

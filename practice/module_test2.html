@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <!--
+        執行之後，發現並沒有報錯，相當於 DOMContentLoaded 事件，也就是會在 HTML 所有節點在畫面上渲染出來之後，才會執行模組的程式。
+    -->
+
+    <!-- 將 type="module" 移除，console 就會報錯。 -->
+    <script type="module">
+      let btn = document.getElementById("btn");
+      btn.addEventListener("click", function () {
+        alert("test");
+      });
+    </script>
+  </head>
+  <body>
+    <button type="button" id="btn">按鈕</button>
+  </body>
+</html>

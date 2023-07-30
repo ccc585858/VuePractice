@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <input type="text" id="my_id" ref="username" />
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+    <script>
+      const app = Vue.createApp({
+        mounted() {
+          let my_el = this.$refs.username; // 可取得 DOM 元素
+          console.log(my_el);
+          console.log(my_el.id);
+        },
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app"><span id="countdown"></span></div>
+
+    <script>
+      function date_diff(date1_obj, date2_obj) {
+        // 相差的秒數
+        let diff_seconds = Math.floor(
+          Math.abs(date1_obj.getTime() - date2_obj.getTime()) / 1000
+        );
+
+        let days = Math.floor(diff_seconds / 60 / 60 / 24);
+        let hours = Math.floor((diff_seconds - days * 86400) / 60 / 60);
+        let minutes = Math.floor(
+          (diff_seconds - days * 86400 - hours * 3600) / 60
+        );
+        let seconds = diff_seconds - days * 86400 - hours * 3600 - minutes * 60;
+
+        return `倒數 ${days} 天 ${hours} 小時 ${minutes} 分鐘 ${seconds} 秒鐘，就跨年囉！`;
+      }
+
+      let d_final = new Date(2024, 0, 1, 0, 0, 0); // 2024 年 1 月 1 日 0 時 0 分 0 秒
+
+      function get_countdown() {
+        let d = new Date();
+        let final_str = date_diff(d, d_final);
+
+        let countdown_el = document.getElementById("countdown");
+        countdown_el.innerHTML = final_str;
+      }
+
+      get_countdown();
+      setInterval(function () {
+        get_countdown();
+      }, 1000);
+    </script>
+  </body>
+</html>

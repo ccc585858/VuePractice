@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Counter</title>
+    <style>
+      .btn_counter {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="MyApp">
+      <button type="button" v-on:click="plusOne" class="btn_counter">
+        計數器: {{ counter}}
+      </button>
+      <button type="button" @click="plusOne" class="btn_counter">
+        計數器: {{ counter}}
+      </button>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <script>
+      let app = Vue.createApp({
+        data() {
+          return {
+            counter: 0,
+          };
+        },
+        methods: {
+          plusOne() {
+            // alert("abc");
+            // console.log(this.counter);
+            this.counter++;
+          },
+        },
+      });
+      app.mount("#MyApp");
+    </script>
+  </body>
+</html>

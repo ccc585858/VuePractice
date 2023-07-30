@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="myapp">
+      訊息: {{ msg }}
+      <br />
+      使用 v-html：
+      <div :id="dynamicID" v-html="msg"></div>
+      <!-- : 是 v-bind 的簡寫 -->
+      <button type="button" :disabled="isDisabled" v-bind="btnOtherAttrs">
+        按鈕
+      </button>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            dynamicID: "the_id",
+            msg: `<span style="color: red;">這是測試的文字</span>`,
+            isDisabled: true,
+            btnOtherAttrs: {
+              id: "btn_id",
+              class: "chang_color",
+            },
+          };
+        },
+      });
+
+      app.mount("#myapp");
+    </script>
+  </body>
+</html>

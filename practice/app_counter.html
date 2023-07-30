@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="counter">Counter: {{ counter }}</div>
+
+    <button type="button" id="the_btn">按鈕</button>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            counter: 0,
+          };
+        },
+        mounted() {
+          setInterval(() => {
+            // console.log(this);
+            this.counter += 1;
+          }, 1000);
+        },
+      });
+
+      const vm = app.mount("#counter"); // ViewModel
+
+      // 元件外的按鈕
+      let the_btn_el = document.getElementById("the_btn");
+      the_btn_el.addEventListener("click", function () {
+        // 分別印出以下資料來觀察：
+        //console.log(app);
+        //console.log(vm);
+        //console.log(vm.$data);
+        // 透過 vm 取得元件上的資料，以下兩個寫法都可
+        //console.log(vm.$data.counter); // 寫法一
+        //console.log(vm.counter);       // 寫法二
+        // vm.counter = 1000;
+      });
+    </script>
+  </body>
+</html>

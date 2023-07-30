@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <script type="module">
+      import shit, { hi, hello, arr } from "./modules/say_hi.js";
+      // 1、 shit 可以自行替換，不論是匿名函式還是有名稱的函式，都會以這裡指定的 shit 名稱為主。
+      // 2、shit 不可放在大括號裡。
+
+      console.log(hi("John"));
+      console.log(hello("John"));
+      console.log(arr);
+      console.log(shit());
+    </script>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <h1>test</h1>
+
+    <div id="app">{{ message }}</div>
+
+    <!--有開發者工具-->
+    <script src="./vendors/vue/vue.global.js"></script>
+
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+    <!--沒有開發者工具 上線時可以使用15行的版本-->
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            message: "哈囉 Vue!!",
+          };
+        },
+      });
+
+      // 掛載到頁面上某個節點
+      app.mount("#app");
+
+      // Vue.createApp({}).mount("#app") 亦可以寫成這樣
+    </script>
+  </body>
+</html>

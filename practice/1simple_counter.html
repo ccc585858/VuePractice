@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .btn_counter {
+        background-color: black;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <button type="button" class="btn_counter">計數器:0</button>
+
+    <script>
+      let counter = 0;
+      let btn_counter_el = document.getElementsByClassName("btn_counter")[0];
+      btn_counter_el.addEventListener("click", function () {
+        counter++;
+        this.innerHTML = `計數器: ${counter}`;
+      });
+    </script>
+  </body>
+</html>

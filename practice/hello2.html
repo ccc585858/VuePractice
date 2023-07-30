@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <h1>test2</h1>
+
+    <div id="app">{{ message }}</div>
+
+    <!-- ES Module 寫法 -->
+    <script type="module">
+      import { createApp } from "./vendors/vue/vue.esm-browser.js";
+      //   import { createApp } from "./vendors/vue/vue.esm-browser.prod.js";
+
+      const app = createApp({
+        data() {
+          return {
+            message: "哈囉 Vue ESM!!",
+          };
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>
