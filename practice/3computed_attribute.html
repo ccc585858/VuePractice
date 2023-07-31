@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>原價：<span class="original_price"></span>元</div>
+      <div>特價：<span class="on_sale"></span>元</div>
+    </div>
+
+    <script>
+      let original_price = 300;
+      let on_sale = original_price * 0.8;
+
+      let original_price_el =
+        document.getElementsByClassName("original_price")[0];
+      let on_sale_el = document.getElementsByClassName("on_sale")[0];
+
+      original_price_el.innerHTML = original_price;
+      on_sale_el.innerHTML = on_sale;
+    </script>
+  </body>
+</html>

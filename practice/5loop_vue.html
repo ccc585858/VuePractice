@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      ul.qa_list > li {
+        margin-bottom: 20px;
+      }
+      ul.qa_list > li div.q {
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 5px;
+      }
+      ul.qa_list > li:last-child {
+        margin-bottom: 0;
+      }
+
+      .important {
+        font-weight: bold;
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <ul class="qa_list">
+        <!-- 30-34行 為物件寫法-->
+        <!-- <li
+          v-for="(value, index) in items"
+          :key="value"
+          :class="{important:value.is_important}"
+        > -->
+
+        <!-- 35-39行 為陣列裡三元運算式-->
+        <li
+          v-for="(value, index) in items"
+          :key="value"
+          :class="[value.is_important?'important':'']"
+        >
+          <div class="q">Q{{ index + 1}}：{{value.q}}</div>
+          <div class="a">A{{ index +1}}：{{value.a}}</div>
+        </li>
+      </ul>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <script>
+      //   let arr_data = [
+      //     {
+      //       q: "如何加入會員呢？",
+      //       a: "臨櫃辦理。",
+      //       is_important: false,
+      //     },
+      //     {
+      //       q: "該如何繳費呢？",
+      //       a: "持條碼至超商繳費。",
+      //       is_important: true,
+      //     },
+      //     {
+      //       q: "週末門市有開嗎？",
+      //       a: "沒有，放假。",
+      //       is_important: false,
+      //     },
+      //   ];
+
+      //   arr_data.forEach(function (item, index) {
+      //     let li_str = `
+      //     <li class="${item.is_important ? "important" : ""}">
+      //       <div class="q">Q${index + 1}: ${item.q}</div>
+      //       <div class="a">A: ${item.a}</div>
+      //     </li>
+      //   `;
+      //     let ul_el = document.getElementsByClassName("qa_list")[0];
+      //     ul_el.insertAdjacentHTML("beforeend", li_str);
+      //   });
+
+      let Momo = Vue.createApp({
+        data() {
+          return {
+            items: [
+              {
+                q: "如何加入會員呢？",
+                a: "臨櫃辦理。",
+                is_important: false,
+              },
+              {
+                q: "該如何繳費呢？",
+                a: "持條碼至超商繳費。",
+                is_important: true,
+              },
+              {
+                q: "週末門市有開嗎？",
+                a: "沒有，放假。",
+                is_important: false,
+              },
+            ],
+          };
+        },
+      });
+      Momo.mount("#app");
+    </script>
+  </body>
+</html>

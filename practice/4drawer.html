@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      div.right_sidebar {
+        position: fixed;
+
+        top: 50%;
+        right: 0;
+        transform: translate(100%, -50%);
+        min-height: 200px;
+        width: 130px;
+        background-color: black;
+        color: white;
+        padding: 10px 20px 10px 10px;
+        border-radius: 10px 0 0 10px;
+
+        /* 過場效果 */
+        transition: transform 1s ease-in-out;
+      }
+      div.right_sidebar.-open {
+        transform: translate(0%, -50%);
+      }
+
+      /* 展開的按鈕 */
+      div.right_sidebar button.btn_drawer {
+        background: none;
+        background-color: black;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translate(-100%, -50%);
+        color: white;
+        border: 0;
+        font-size: 1rem; /* 16px */
+        width: 1.8em; /* 相對於這個元素的文字大小 */
+        padding: 4px 0;
+        line-height: 1.6;
+        display: inline-block;
+        cursor: pointer;
+        border-radius: 5px 0 0 5px;
+        text-align: center;
+        outline: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div style="border: 1px solid black; height: 2000px"></div>
+
+    <div id="app" class="right_sidebar">
+      <button type="button" class="btn_drawer">展開</button>
+      右側的內容右側的內容右側的內容右側的內容
+    </div>
+
+    <script>
+      let btn_drawer_el = document.getElementsByClassName("btn_drawer")[0];
+      btn_drawer_el.addEventListener("click", function (e) {
+        e.target.closest("div.right_sidebar").classList.toggle("-open");
+        if (e.target.closest("div.right_sidebar").classList.contains("-open")) {
+          this.innerHTML = "關閉";
+        } else {
+          this.innerHTML = "展開";
+        }
+      });
+    </script>
+  </body>
+</html>
