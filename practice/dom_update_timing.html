@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="myapp">
+      <p ref="para" id="a" v-bind:data-count="count">計數：{{ count }}</p>
+      <button type="button" @click="increment">+1</button>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+
+    <script type="module">
+      const app = Vue.createApp({
+        data() {
+          return {
+            count: 0,
+          };
+        },
+        methods: {
+          increment() {
+            this.count++;
+
+            // 寫法一：上面這行更新了資料，但 DOM 上的節點尚未更新
+            let a_el = document.getElementById("a");
+            console.log(a_el.getAttribute("data-count"));
+            //console.log( this.$refs.para.getAttribute("data-count") );
+
+            // 寫法二：
+            /*
+            Vue.nextTick(() => { // 等待 DOM 更新完成，才會執行
+              let a_el = document.getElementById("a");
+              console.log(a_el.getAttribute("data-count"));
+              //console.log( this.$refs.para.getAttribute("data-count") );
+            });
+            */
+          },
+        },
+        // 寫法三：跟寫法二是一樣的結果
+        updated() {
+          /*
+          let a_el = document.getElementById("a");
+          console.log(a_el.getAttribute("data-count"));
+          //console.log( this.$refs.para.getAttribute("data-count") );
+          */
+        },
+      });
+      app.mount("#myapp");
+    </script>
+  </body>
+</html>

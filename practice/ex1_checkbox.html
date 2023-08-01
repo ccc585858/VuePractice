@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="app">
+      <input
+        type="checkbox"
+        id="check_all"
+        :checked="isCheckAll"
+        @click="checkAllItems"
+      /><label for="check_all">全選</label>
+
+      <hr />
+      <template v-for="item in items" :key="item.id">
+        <input
+          type="checkbox"
+          :id="item.id"
+          :value="item.value"
+          v-model="checkedItems"
+        />
+        <label :for="item.id">選項{{item.value}}</label>
+      </template>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+
+    <script>
+      const RootComponent = {
+        data() {
+          return {
+            checkedItems: [],
+            items: [
+              {
+                id: "option1",
+                value: "a",
+              },
+              {
+                id: "option2",
+                value: "b",
+              },
+              {
+                id: "option3",
+                value: "c",
+              },
+            ],
+          };
+        },
+        computed: {
+          isCheckAll(e) {
+            return this.checkedItems.length == this.items.length;
+          },
+        },
+        methods: {
+          checkAllItems(e) {
+            //console.log(this.isCheckAll);
+            if (this.isCheckAll) {
+              this.checkedItems = [];
+            } else {
+              let arr = this.items.map((item, i) => {
+                return item.value;
+              });
+              // arr 的結果是： ["a", "b", "c"]
+              this.checkedItems = arr;
+            }
+          },
+        },
+      };
+      Vue.createApp(RootComponent).mount("#app");
+    </script>
+  </body>
+</html>

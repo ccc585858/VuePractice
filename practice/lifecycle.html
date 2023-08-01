@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="myblock"></div>
+
+    <hr />
+
+    <button type="button" id="mybtn">掛載元件</button>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+
+    <script>
+      const RootComponent = {
+        template: `
+        <p>資料：{{ mytext }}</p>
+        <input type="text" v-model="mytext" ref="my_input" :data-text="mytext" />
+        <br /><br />
+        <button type="button" @click="destroy">卸載(摧毀)元件</button>
+        `,
+
+        data() {
+          return {
+            mytext: "1",
+          };
+        },
+
+        // 元件在創建的過程中觸發
+        beforeCreate() {
+          console.log("beforeCreate");
+
+          // 出現 undefined：這時還取不到資料
+          //console.log(this.mytext);
+
+          // 尚無法取得頁面上的節點
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+        },
+        created() {
+          console.log("created");
+
+          //console.log(this.mytext);
+
+          // 尚無法取得頁面上的節點
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+        },
+
+        // 元件掛載在頁面(DOM)上時觸發
+        beforeMount() {
+          console.log("beforeMount");
+
+          //console.log(this.mytext);
+
+          // 尚無法取得頁面上的節點
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+        },
+        mounted() {
+          console.log("mounted");
+
+          //console.log(this.mytext);
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+        },
+
+        // 元件資料有更新時，才會觸發：DOM 重新渲然前、後
+        beforeUpdate() {
+          console.log("beforeUpdate");
+          //console.log(this.mytext);
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+        },
+        updated() {
+          console.log("updated");
+          //console.log(this.mytext);
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+        },
+
+        // 元件卸載(摧毀)時，才會觸發
+        beforeUnmount() {
+          console.log("beforeUnmount");
+
+          //console.log(this.mytext);
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+        },
+        unmounted() {
+          console.log("unmounted");
+
+          //console.log(this.mytext);
+          //console.log(this.$refs.my_input.getAttribute("data-text"));
+
+          app = null;
+          vm = null;
+        },
+
+        // 自己寫的 destroy 函式，放在 methods 物件裡
+        methods: {
+          destroy() {
+            console.log("執行自訂的 destroy() 函式");
+            app.unmount();
+          },
+        },
+      };
+
+      var app = Vue.createApp(RootComponent);
+      var vm = app.mount("#myblock");
+
+      // 重新掛載元件
+      var mybtn = document.getElementById("mybtn");
+      mybtn.addEventListener("click", function () {
+        if (!app) {
+          app = Vue.createApp(RootComponent);
+          vm = app.mount("#myblock");
+        }
+      });
+    </script>
+  </body>
+</html>
