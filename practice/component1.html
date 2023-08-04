@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="my_block">
+      <!-- 使用 TextOnly 元件(留意標籤的寫法) -->
+      <text-only></text-only>
+      <!-- 第三步：使用 -->
+      <button-counter-parent></button-counter-parent>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./第一步：載入元件模組vendors/vue/vue.global.prod.js"></script> -->
+
+    <script type="module">
+      // 載入元件，定義變數名稱為 TextOnly
+      import TextOnly from "./components/TextOnly.js";
+      // 第一步：載入元件模組
+      import ButtonCounterParent from "./components/ButtonCounterParent.js";
+
+      // 建立一個 Vue 的應用程式
+      const app = Vue.createApp({});
+
+      // 在 app 上，將 TextOnly 元件，以全域的方式來掛載；且令該元件名稱為 "TextOnly"
+      app.component("TextOnly", TextOnly);
+      // 第二步：全域掛載
+      app.component("ButtonCounterParent", ButtonCounterParent);
+
+      // 將 Vue 應用程式 掛載至 id 叫做 my_block 的元素
+      app.mount("#my_block");
+    </script>
+  </body>
+</html>

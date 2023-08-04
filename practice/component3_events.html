@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="my_block">
+      <!-- 使用了元件，且綁定了自訂事件 myEvent，一旦該事件觸發，會執行 test 函式 -->
+      <button-only @my-event="test"></button-only>
+
+      <!-- 又使用了元件，同上，但該事件只會觸發一次 -->
+      <button-only @my-event.once="test"></button-only>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+
+    <script type="module">
+      import ButtonOnly from "./components/ButtonOnly.js"; // 載入元件
+
+      const app = Vue.createApp({
+        data() {
+          return {};
+        },
+        methods: {
+          test(e, my_data) {
+            console.log(e);
+            console.log(my_data);
+          },
+        },
+      });
+
+      app.component("ButtonOnly", ButtonOnly); // 替 app 註冊了一個 ButtonOnly 元件
+
+      app.mount("#my_block");
+    </script>
+  </body>
+</html>

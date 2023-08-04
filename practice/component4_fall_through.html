@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+      .a {
+        border: 1px solid red;
+      }
+      .b {
+        border: 1px solid blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="myapp">
+      <text-only2
+        class="a"
+        id="a"
+        style="font-size: 20px"
+        data-target="abc"
+      ></text-only2>
+      <text-only2 class="b" id="b"></text-only2>
+      <text-only2></text-only2>
+    </div>
+
+    <script src="./vendors/vue/vue.global.prod.js"></script>
+    <script type="module">
+      import TextOnly2 from "./components/TextOnly2.js";
+
+      const app = Vue.createApp({
+        data() {
+          return {};
+        },
+      });
+
+      app.component("TextOnly2", TextOnly2);
+      app.mount("#myapp");
+    </script>
+  </body>
+</html>

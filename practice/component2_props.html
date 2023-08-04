@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="my_block">
+      <text-only :greet-msg="helloText" v-bind="post"></text-only>
+      <!-- 等同於 
+        <text-only :id="post.id" :title="post.title"></text-only>
+        -->
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+
+    <script type="module">
+      import TextOnly from "./components/TextOnly.js";
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            helloText: "父層元件資料",
+            post: {
+              id: 1,
+              title: "這是標題",
+            },
+          };
+        },
+      });
+
+      app.component("TextOnly", TextOnly);
+
+      app.mount("#my_block");
+    </script>
+  </body>
+</html>

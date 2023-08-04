@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="myapp">
+      <alert-block>
+        <button type="button">按鈕</button>
+      </alert-block>
+      <alert-block> </alert-block>
+
+      <alert-block>
+        <template v-slot:default> 嗨 </template>
+        <template v-slot:footer>
+          <button type="button">按鈕</button>
+        </template>
+      </alert-block>
+    </div>
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+    <script type="module">
+      import AlertBlock from "./components/AlertBlock.js";
+
+      const app = Vue.createApp({
+        data() {
+          return {};
+        },
+      });
+
+      app.component("AlertBlock", AlertBlock);
+      app.mount("#myapp");
+    </script>
+  </body>
+</html>

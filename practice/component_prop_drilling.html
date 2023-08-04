@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+  </head>
+  <body>
+    <div id="myapp">
+      <!-- 第三步：綁定 -->
+      <post-content :msg="msg"></post-content>
+
+      <!-- 第一步：加按鈕 -->
+      <button type="button" @click="my_func">按鈕</button>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+
+    <script type="module">
+      import PostContent from "./components/PostContent.js";
+
+      // 第二步：改寫
+      const app = Vue.createApp({
+        data() {
+          return {
+            msg: "hi2",
+          };
+        },
+        methods: {
+          my_func() {
+            this.msg = "資料改變";
+          },
+        },
+      });
+
+      app.component("PostContent", PostContent);
+
+      app.mount("#myapp");
+    </script>
+  </body>
+</html>
