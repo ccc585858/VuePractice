@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./plugins/datepicker/main.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <DatePicker v-model="date" range />
+      <!-- <DatePicker v-model="date" /> -->
+    </div>
+    <script src="./vendors/vue/vue.global.prod.js"></script>
+    <script src="./plugins/datepicker/vue-datepicker.iife.js"></script>
+    <script>
+      const app = Vue.createApp({
+        // components: { Datepicker: VueDatePicker },
+        data() {
+          return {
+            date: "",
+          };
+        },
+        mounted() {
+          const startDate = new Date();
+          const endDate = new Date(new Date().setDate(startDate.getDate() + 7));
+          this.date = [startDate, endDate];
+          //   this.date = startDate;
+        },
+      });
+      app.component("Datepicker", VueDatePicker);
+      app.mount("#app");
+    </script>
+  </body>
+</html>

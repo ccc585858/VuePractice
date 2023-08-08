@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      article.product {
+        border: 1px solid red;
+        display: flex;
+      }
+      aside.filter {
+        border: 1px solid blue;
+        flex-shrink: 0;
+        flex-basis: 200px;
+      }
+      section.product_sec {
+        border: 1px solid black;
+        flex-grow: 1;
+      }
+      label {
+        cursor: pointer;
+      }
+      ul.product_list {
+        border: 1px solid purple;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      ul.product_list > li {
+        border: 1px solid green;
+      }
+      ul.product_list > li div.product_block {
+        border: 1px solid blue;
+        display: grid;
+        grid-template-columns: 50px auto;
+      }
+      ul.product_list > li div.product_block div.left_block {
+        border: 1px solid gray;
+      }
+      ul.product_list > li div.product_block div.right_block {
+        border: 1px solid yellow;
+      }
+      img {
+        max-width: 100%;
+      }
+      h1,
+      p {
+        margin: 0;
+      }
+      p {
+        display: inline-block;
+        margin-right: 20px;
+      }
+      p.price {
+        background-color: lightblue;
+      }
+      h1 {
+        font-size: 16px;
+      }
+      a {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <article class="product" id="app">
+      <aside class="filter">
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value="999"
+              class="price_filter"
+              v-model="priceRange"
+            />
+            NT$0 ~ NT$999
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value="1999"
+              class="price_filter"
+              v-model="priceRange"
+            />
+            NT$1000 ~ NT$1999
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value="2999"
+              class="price_filter"
+              v-model="priceRange"
+            />
+            NT$2000 ~ NT$2999
+          </label>
+        </div>
+        <div>
+          <label>
+            <input
+              type="checkbox"
+              value="3000"
+              class="price_filter"
+              v-model="priceRange"
+            />
+            NT$3000 以上
+          </label>
+        </div>
+      </aside>
+
+      <section class="product_sec">
+        <ul class="product_list">
+          <!-- 資料有：商品圖、商品名稱、價格、商品描述、詳情網址 -->
+
+          <li v-for="item in productsArr">
+            <div class="product_block">
+              <div class="left_block">
+                <img :src="item.p_img" />
+              </div>
+              <div class="right_block">
+                <h1>{{ item.p_name }}</h1>
+                <p class="price">價格：NT${{ item.p_price }}</p>
+                <p>{{ item.p_desc }}</p>
+                <br />
+                <a :href="item.p_url">詳情</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </article>
+    <script src="./vendors/vue/vue.global.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {
+            apiUrl:
+              "https://notes.webmix.cc/ajax/teach/product_api.php?price_range=${price_str}",
+            priceRange: ["999", "1999", "2999", "3000"],
+            productsArr: [],
+          };
+        },
+        mounted() {
+          this.getProducts();
+        },
+        computed: {
+          priceRangeStr() {
+            this.priceRange.sort(function (a, b) {
+              return parseInt(a) - parseInt(b);
+            });
+            return this.priceRange.join(","); // "999,1999,2999,3999"
+          },
+        },
+        watch: {
+          priceRange(newData, oldData) {
+            this.getProducts();
+          },
+        },
+        methods: {
+          getProducts() {
+            fetch(`${this.apiUrl}?price_range=${this.priceRangeStr}`)
+              .then((res) => res.json())
+              .then((data) => {
+                //console.log(data);
+                this.productsArr = data;
+              });
+
+            //let res = await fetch(`${this.apiUrl}?price_range=${this.priceRangeStr}`);
+            //let data = await res.json();
+            //this.productsArr = data;
+          },
+        },
+      });
+      app.mount("#app");
+    </script>
+  </body>
+</html>

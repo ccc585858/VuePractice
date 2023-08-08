@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+      .active {
+        background-color: red;
+        color: white;
+      }
+      .tab_content {
+        border: 1px solid lightgray;
+        padding: 10px;
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="the_block">
+      <button
+        type="button"
+        v-for="tab in tabs"
+        :key="tab.id"
+        :class="{active:currentTab == tab.id}"
+        @click="currentTab = tab.id"
+      >
+        {{ tab.name }}
+      </button>
+
+      <component
+        v-bind:is="current_tab_component"
+        class="tab_content"
+      ></component>
+    </div>
+
+    <script src="./vendors/vue/vue.global.js"></script>
+    <!-- <script src="./vendors/vue/vue.global.prod.js"></script> -->
+
+    <script type="module">
+      var app = Vue.createApp({
+        data() {
+          return {
+            currentTab: "tab1",
+            tabs: [
+              {
+                id: "tab1",
+                name: "頁籤一",
+              },
+              {
+                id: "tab2",
+                name: "頁籤二",
+              },
+              {
+                id: "tab3",
+                name: "頁籤三",
+              },
+            ],
+          };
+        },
+        computed: {
+          current_tab_component() {
+            return this.currentTab + "_content";
+          },
+        },
+      });
+
+      app.component("tab1_content", {
+        template: `
+    <div class="a">tab1 的內容</div>
+  `,
+      });
+
+      app.component("tab2_content", {
+        template: `
+    <div class="b">tab2 的內容</div>
+  `,
+      });
+
+      app.component("tab3_content", {
+        template: `
+    <div class="c">tab3 的內容</div>
+  `,
+      });
+      app.mount("#the_block");
+    </script>
+  </body>
+</html>

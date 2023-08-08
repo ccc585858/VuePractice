@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <article class="task_container" id="task_container">
+      <button type="button" class="btn_empty" @click="taskClear">清空</button>
+
+      <h1 class="title1">任務管理</h1>
+
+      <div class="task_add_block" ref="taskAddBlock">
+        <input
+          type="text"
+          class="task_name"
+          placeholder="輸入待辦事項…"
+          @focus="toggleShadow"
+          @blur="toggleShadow"
+          v-model.trim="taskText"
+          @keyup.enter="taskAdd"
+        />
+        <button type="button" class="task_add" @click="taskAdd">新增</button>
+      </div>
+
+      <div class="task_list_parent">
+        <ul class="task_list" ref="taskList">
+          <task-item
+            :tasks="tasks"
+            @task-remove="taskRemove"
+            @task-edit="taskEdit"
+            ref="taskItem"
+            @task-swap="taskSwap"
+            @task-star="taskStar"
+          ></task-item>
+        </ul>
+      </div>
+    </article>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
+    <script src="./vendors/vue/vue.global.js"></script>
+    <script src="./js/index.js" type="module"></script>
+  </body>
+</html>
